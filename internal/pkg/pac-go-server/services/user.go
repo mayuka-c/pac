@@ -1,6 +1,7 @@
 package services
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/PDeXchange/pac/internal/pkg/pac-go-server/client"
@@ -64,5 +65,5 @@ func GetUser(c *gin.Context) {
 			return
 		}
 	}
-	c.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
+	c.JSON(http.StatusNotFound, gin.H{"error": fmt.Sprintf("User with ID: %s does not exist.", id)})
 }
