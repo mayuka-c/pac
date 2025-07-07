@@ -10,7 +10,8 @@ import (
 )
 
 func GetUsers(c *gin.Context) {
-	usrs, err := client.NewKeyClockClient(c.Request.Context()).GetUsers()
+	config := client.GetConfigFromContext(c.Request.Context())
+	usrs, err := client.NewKeyCloakClient(config, c).GetUsers()
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -38,7 +39,8 @@ func GetUsers(c *gin.Context) {
 
 func GetUser(c *gin.Context) {
 	id := c.Param("id")
-	usrs, err := client.NewKeyClockClient(c.Request.Context()).GetUsers()
+	config := client.GetConfigFromContext(c.Request.Context())
+	usrs, err := client.NewKeyCloakClient(config, c).GetUsers()
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
